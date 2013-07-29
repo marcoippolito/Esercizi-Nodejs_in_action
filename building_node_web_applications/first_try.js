@@ -29,7 +29,11 @@ var server = http.createServer(function(req, res) {
 // Set Content-Length using stat object //
         res.setHeader('Content-Length', stat.size);
         var stream = fs.createReadStream(path);
- 
+        stream.pipe(res);
+        stream.on('error', function(err) {
+          res.statusCode = 500;
+          res.end('Internal Server Error');
+        }); 
 // req.method is the HTTP method requested. //
   switch (req.method) {
     case 'POST':
@@ -73,7 +77,14 @@ var server = http.createServer(function(req, res) {
 	res.end('OK\n');
       }
       break;
+    case 'POST':
+      upload(req, res);
+      break;
   }
 
 });
+// Serve HTML form with file input //
+function upload(req, res) {
+// upload logic //
+}
 server.listen(3000);
