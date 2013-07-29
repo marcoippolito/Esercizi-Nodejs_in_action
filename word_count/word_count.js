@@ -25,7 +25,7 @@ function countWordsInText(text) {
       wordCounts[word] = (wordCount[word]) ? wordCounts[word] + 1 : 1;
     }
   }
-}      
+}
 
 // Get a list of the files in the text directory. //
 fs.readdit(filesDir, function(err, files) {
@@ -34,22 +34,21 @@ fs.readdit(filesDir, function(err, files) {
     // Define a task to handle each file. Each task includes a call to a function that will asynchronously read the file and then count the file's word usage. //
     var task = (function(file) {
       return function() {
-        fs.readFile(file, function(err, text) {
-          if (err) throw err;
-          countWordsinText(text);
-          checkIfComplete();
-        });
-      }
-}) (filesDir + '/' + files[index]);
+	fs.readFile(file, function(err, text) {
+	  if (err) {
+	    throw err;
+	  }
+	  else {
+	    countWordsinText(text);
+	    checkIfComplete();
+	  }
+	});
+      };
+}); (filesDir + '/' + files[index]);
 tasks.push(task); // Add each task to an array of functions to call in parallel.//
 
 // Start executing every task in parallel. //
-for (var task in tasks) {
+for (var indice in tasks) {
   tasks[task]();
 }
 });
-  
-
-        
-
-    
