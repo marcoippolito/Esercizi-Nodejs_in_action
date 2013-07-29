@@ -1,0 +1,35 @@
+<rss version="2.0">
+<channel>
+<title>Caffenichilismo.it</title>
+<link>http://www.caffenichilismo.it</link>
+<description>caffenichilismo.it - il sito per chi non crede piu' a nulla presenta il podcast di radio nk</description>
+<language>it</language>
+<copyright>Caffe' Nichilismo</copyright>
+<managingEditor>redazione@caffenichilismo.it</managingEditor>
+<webMaster>webmaster@caffenichilismo.it</webMaster>
+<pubDate>Thu, 20 May 2004 21:00:00 GMT</pubDate>
+<lastBuildDate>Wed, 09 Feb 2005 23:30:00 GMT</lastBuildDate>
+<docs>http://www.caffenichilismo.it/caffe/radio.html</docs>
+
+<item>
+<title>Radio::Logia - la radio che vi guarda dentro - puntata 2 (LoFi)</title>
+<link>http://www.digitalino.com/caffenichilismo/trasmissioni/rlog2_lo.mp3</link>
+<description> Puntata a tema: le peggiori figure di merda della mia vita Sono intervenuti vari personaggi della chatdi asphalto.org, con storie piu' o meno farneticanti. Contiene un lungo dialogo tra la redazione ed il webmastrodel sito in cui si sono toccati temi anche molto distanti dal tema della serata, tipo ad esempio il lavorare in spiaggia d'estate fa sco**re o no? Puntata di quasi due ore, tristemente priva di piccole parti data la pochezza della connessione internet, ma vabbe'.</description>
+<author>redazione@caffenichilismo.it</author>
+<enclosure url="http://www.digitalino.com/caffenichilismo/trasmissioni/rlog2_lo.mp3" length="12738106" type="audio/mpeg">http://www.digitalino.com/caffenichilismo/trasmissioni/rlog2_lo.mp3</enclosure>
+<pubDate>Wed, 09 Feb 2005 23:30:00 GMT</pubDate>
+<source url="http://www.digitalino.com/caffenichilismo/trasmissioni/rlog2_lo.mp3">http://www.
+digitalino.com/caffenichilismo/trasmissioni/rlog2_lo.mp3</source>
+</item>
+
+<item>
+<title>Caffe' Nichilismo on air - puntata 0 - puntata pilota</title>
+<link>http://www.digitalino.com/caffenichilismo/trasmissioni/2004_05_20.mp3</link>
+<description>introducing caffenichilismo on air - Esordio di Caffenichilismo On Air all'insegna della musica exotica, dei discorsi sul tempo, dei bar di provinciae il primo storico minuto di concretismo con i Butthole Surfers</description>
+<author>redazione@caffenichilismo.it</author>
+<enclosure url="http://www.digitalino.com/caffenichilismo/trasmissioni/2004_05_20.mp3" length="14718550"
+type="audio/mpeg">http://www.digitalino.com/caffenichilismo/trasmissioni/2004_05_20.mp3</enclosure><br>
+<pubDate>Thu, 20 May 2004 21:00:00 GMT</pubDate>
+<source url="http://www.digitalino.com/caffenichilismo/trasmissioni/2004_05_20.mp3">http://www.
+digitalino.com/caffenichilismo/trasmissioni/2004_05_20.mp3</source>
+</item>
