@@ -3,10 +3,19 @@ var url = require('url');
 var parse = require('url').parse;
 var join = require('path').join;
 var fs = require('fs');
+// SSL key and cert given as options. //
+var options = {
+  key: fs.readFileSync('./key.pem');
+  cert: fs.readFileSync('./key-cert.pem');
+};
+
+var formidable = require('formidable');
 var root = __dirname;
 // The data store is a regular JavaScript Array in memory. //
 var items = [];
-var server = http.createServer(function(req, res) {
+// options object is passed first //
+// https and http modules have almost identical APIs //
+var server = http.createServer(options, function(req, res) {
 // Pipe the data coming from a source (called a ReadableStream) to a destination (called a WritableStream)
   var url = parse(req.url);
 // Construct absolute path //
@@ -18,22 +27,22 @@ var server = http.createServer(function(req, res) {
     if (err) {
 // File doesn't exist //
       if ('ENOENT' == err.code) {
-        res.statusCode = 404;
-        res.end('Not Found');
+	res.statusCode = 404;
+	res.end('Not Found');
       }
       else if {
-        res.statusCode = 500;
-        res.end('Internal Server Error');
+	res.statusCode = 500;
+	res.end('Internal Server Error');
       }
       else {
 // Set Content-Length using stat object //
-        res.setHeader('Content-Length', stat.size);
-        var stream = fs.createReadStream(path);
-        stream.pipe(res);
-        stream.on('error', function(err) {
-          res.statusCode = 500;
-          res.end('Internal Server Error');
-        }); 
+	res.setHeader('Content-Length', stat.size);
+	var stream = fs.createReadStream(path);
+	stream.pipe(res);
+	stream.on('error', function(err) {
+	  res.statusCode = 500;
+	  res.end('Internal Server Error');
+	});
 // req.method is the HTTP method requested. //
   switch (req.method) {
     case 'POST':
@@ -85,6 +94,25 @@ var server = http.createServer(function(req, res) {
 });
 // Serve HTML form with file input //
 function upload(req, res) {
+// respond with 400 Bad Request when the request doesn't appear to contain the appropriate type of content. //
+  if (!isFormData(req)) {
+    res.statusCode = 400;
+    res.end('Bad Request: expecting multipart/form-data');
+    return;
+  }
+  else {
+// Using formidable's API //
+  var form = new formidable.IncomingForm();
 // upload logic //
+  form.parse(req, function(err, fields, files) {
+    console.log(fields);
+    console.log(files);
+    res.end('upload complete!');
+  });
+  form.on('progress', function(bytesReceived, bytesExpected) {
+    var percent = Math.floor(bytesReceived / bytesExpected * 100);
+    console.log(percent);
+  }); 
+  form.parse(req);
 }
-server.listen(3000);
+server.listen(3000)
