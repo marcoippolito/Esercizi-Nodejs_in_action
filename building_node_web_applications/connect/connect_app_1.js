@@ -29,6 +29,18 @@ function restrict(req, res, next) {
   });
 }
 
+function admin(req, res, next) {
+  switch(req.url) {
+    case '/':
+      res.end('try /users');
+      break;
+    case '/users':
+      res.setHeader('Content-Type', 'application/json');
+      res.end(JSON.stringify(['tobi', 'loki', 'jane']));
+      break;
+  }
+}
+
 connect()
   .use(logger)
   .use('/admin', restrict)
