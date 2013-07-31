@@ -40,7 +40,23 @@ function admin(req, res, next) {
       break;
   }
 }
-
+// Error-handling middleware in Connect //
+function errorHandler() {
+  var env = process.env.NODE_ENV || 'development';
+// Error-handling middleware defines four arguments //
+  return function(err, req, res, next) {
+    res.statusCode = 500;
+// errorHandler behaves differently depending on value of NODE_ENV //
+    switch (env) {
+      case 'development':
+	res.setHeader('Content-Type', 'application/json');
+	res.end(JSON.stringify(err));
+	break;
+      default:
+	res.end('Server error');
+    }
+  };
+}
 connect()
   .use(logger)
   .use('/admin', restrict)
