@@ -57,9 +57,46 @@ function errorHandler() {
     }
   };
 }
+
+// Wrap multiple limit() middleware based on the Content-Type of the request //
+function type(type, fn) { //fn in this case is one of the liimit() istances //
+  return function(req, res, next) {
+    var ct = req.headers['contect-type'] || '';
+    if (0 != ct.indexOf(type)) { // the returned middleware first checks the content-type //
+      return next();
+    }
+    fn(req, res, next); // before invoking the passed-in limit() middleware //
+  }
+}
+var app = connect()
+  .use(connect.favicon(__dirname + '/public/faicon.ico')) //manually specified custom .ico file. passing the file path as the only argument//
+  .use(connect.logger())
+  .use(connect.cookieParser('keyboard car'))
+// session()) middleware requires signed cookies to function, so use cookieParser() above it and pass a secret //
+  .use(connect.session())
+  .use(function(req, res, next) {
+    var sess = req.session;
+    if (sess.views) {
+      res.setHeader('Content-Type', 'text/html');
+      res.write('<p>views: ' + sess.views + '</p>');
+      res.end();
+      sess.views++;
+    }
+    else {
+      sess.views = 1;
+      res.end('welcome to the session demo. refresh!');
+    }
+  });
+  .use(type('application/x-www-form-urlencoded', connect.limit('64kb')))
+  .use(type('application/json', connect.limit('32kb'))) //handles forms, json//
+  .use(type('image', connect.limit('2mb'))) //image uploads up to 2 megabytes//
+  .use(type('video', connect.limit('30mb'))) //video uploads up to 30 megabytes//
+  .use(connect.bodyParser())
+  .use(hello);
+
 connect()
   .use(logger)
   .use('/admin', restrict)
-  .use('/admin', admin)
+ .use('/admin', admin)
   .use(hello)
   .listen(3000);
