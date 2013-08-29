@@ -5,7 +5,7 @@ function logger(req, res, next) {
   console.log('%s %s', req.method, req.url);
   next();
 }
-//middleware componen that will send a response to the HTTP request //
+//middleware component that will send a response to the HTTP request //
 function hello(req, res) {
   res.setHeader('Content-Type', 'text/plain');
   res.end('hello world');
@@ -25,7 +25,7 @@ function restrict(req, res, next) {
     if (err) {
       return next(err); // Inform dispatcher that an error occured //
     }
-    next(); // Call next()) with no arguments when given valid credentials //
+    next(); // Call next() with no arguments when given valid credentials //
   });
 }
 
@@ -59,7 +59,7 @@ function errorHandler() {
 }
 
 // Wrap multiple limit() middleware based on the Content-Type of the request //
-function type(type, fn) { //fn in this case is one of the liimit() istances //
+function type(type, fn) { //fn in this case is one of the limit() istances //
   return function(req, res, next) {
     var ct = req.headers['contect-type'] || '';
     if (0 != ct.indexOf(type)) { // the returned middleware first checks the content-type //
