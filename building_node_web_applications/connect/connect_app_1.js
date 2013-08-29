@@ -100,3 +100,8 @@ connect()
  .use('/admin', admin)
   .use(hello)
   .listen(3000);
+// Cross-site request forgery protection//
+  .use(connect.bodyParser())
+  .use(connect.cookieParser('secret'))
+  .use(connect.session())
+  .use(connect.csfr());
